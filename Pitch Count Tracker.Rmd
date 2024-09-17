@@ -1,0 +1,50 @@
+---
+title: "Pitch Count Tracker"
+author: "Richard Legler"
+date: "June 20, 2024"
+output: 
+  rmdformats::readthedown:
+    number_sections: true
+    highlight: tango
+    df_print: paged
+    center: true
+---
+
+```{r setup, include=FALSE}
+# Set working directory
+knitr::opts_knit$set(root.dir = 'C:/Users/richa/OneDrive/Documents/Hyannis Harbor Hawks/Cape Code Data')
+
+# Clear environment
+rm(list=ls())
+
+# Import libraries
+library(dplyr)
+library(tidyr)
+```
+
+# Import & Transform Data
+## Import Data
+
+```{r}
+df <- read.csv("CCBL pbp 2024.csv")
+```
+
+## Remove non-Pitch Events
+
+```{r}
+df <- df %>%
+  filter(isPitch == TRUE)
+```
+
+# Keep Relevant Columns
+
+```{r}
+df <- df[,c("game_date", "matchup.pitcher.fullName", "fielding_team")]
+```
+
+# Export
+
+```{r}
+write.csv(df, "C:/Users/richa/OneDrive/Documents/Hyannis Harbor Hawks/Pitch Count Tracker/Pitch_Count_Data_CCBL_2024.csv", row.names = FALSE)
+```
+
